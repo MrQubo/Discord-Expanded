@@ -3,10 +3,10 @@
 
 const VERSION = '0.0.1';
 
-// function debug() { }
-function debug(...args) {
-	console.log('[Discord Expanded Debug]', ...args);
-}
+function debug() { }
+/* function debug(...args) {
+ *     console.log('[Discord Expanded Debug]', ...args);
+ * } */
 
 function log(...args) {
 	console.log('[Discord Expanded]', ...args);
