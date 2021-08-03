@@ -28,14 +28,17 @@ def get_xdg_config_home():
     else:
         return Path('~/.config/').expanduser()
 
-def find_js_file():
+def find_js_paths():
     discord_config_dir = get_xdg_config_home() / 'discord/'
-    paths = list(discord_config_dir.glob('*/modules/discord_voice/index.js'))
+    paths = []
+    paths += list(discord_config_dir.glob('*/modules/discord_game_utils/index.js'))
+    paths += list(discord_config_dir.glob('*/modules/discord_voice/index.js'))
     if len(paths) < 1:
         raise Exception("Couldn't find js file for injection.")
-    if len(paths) > 1:
-        raise Exception('Found multiple js files for injection.')
-    return paths[0].open('r+b')
+    return paths
+
+def find_js_file():
+    return find_js_paths()[0].open('r+b')
 
 def remove_code_from_js_file(js_file):
     while True:
@@ -64,9 +67,11 @@ def inject_code_into_js_file(js_file):
 def uninstall():
     js_file = args.js_file
     if js_file is None:
-        js_file = find_js_file()
-
-    remove_code_from_js_file(js_file)
+        for js_path in find_js_paths():
+            js_file = js_path.open('r+b')
+            remove_code_from_js_file(js_file)
+    else:
+        remove_code_from_js_file(js_file)
 
 def install():
     js_file = args.js_file
