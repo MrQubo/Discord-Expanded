@@ -12,6 +12,11 @@ To try Discord Expanded simply run `./install.py` to install and
 The changes made by this script might get overwritten by Discord update, if this
 happens run `./install.py` again.
 
+Install scripts only work on Linux, on other platforms you can also try opening
+electron console (Ctrl+Shift+I) and pasting code from `discord-expanded.js`
+directly into console, but the changes will be gone as soon as you restart the
+app.
+
 <!-- `--permament` isn't yet implemented, maybe (._.) I'll get to it sometime later.  -->
 <!-- Howerver, the changes made that way won't be permament and will be overwritten
    - on the next Discord update. To prevent this from happening you have to run
